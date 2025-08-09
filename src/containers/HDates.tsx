@@ -17,7 +17,7 @@ export const HDates = ({
       gap='96px'
     >
       <HDate>{first}</HDate>
-      <HDate secondary>{last}</HDate>
+      <HDate secondary={true}>{last}</HDate>
     </Flex>
   )
 }
