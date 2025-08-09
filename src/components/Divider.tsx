@@ -6,16 +6,10 @@ type Props = {
 }
 
 export const Divider = styled.div<Props>`
-  color: ${colors.primary};
-  text-align: center;
-  font-family: 'PT Sans';
-  font-size: 200px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 160px;
-  letter-spacing: -4px;
-
   ${(props) => css`
-    color: ${props.vertical ? colors.secondary : undefined};
+    width: ${props.vertical ? '1px' : '100%'};
+    height: ${props.vertical ? '100%' : '1px'};
+    color: ${colors.blackBlue};
+    opacity: 0.1;
   `}
 `
