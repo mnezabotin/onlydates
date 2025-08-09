@@ -9,7 +9,7 @@ export const Divider = styled.div<Props>`
   ${(props) => css`
     width: ${props.vertical ? '1px' : '100%'};
     height: ${props.vertical ? '100%' : '1px'};
-    color: ${colors.blackBlue};
+    background-color: ${colors.blackBlue};
     opacity: 0.1;
   `}
 `

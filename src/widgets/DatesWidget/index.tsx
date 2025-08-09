@@ -1,8 +1,10 @@
 import React from 'react'
-import { DatesWidgetLayout } from './styles'
+import { SliderBox, DatesWidgetLayout, DividerCenter, DividerLeft, DividerRight, CircleChapterBox } from './styles'
 import { Heading } from '../../components/Heading'
-import { HDates } from '../../containers/HDates'
 import { DatesSlider } from '../../containers/DatesSlider'
+import { CircleChapter } from '../../containers/CircleChapter/index'
+import { Box } from '../../styles/Box'
+import { HDates } from '../../containers/HDates'
 
 const sliders = [
   { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
@@ -18,14 +20,28 @@ const sliders = [
   { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
 ]
 
+const chapters = ['Литература', 'Кино', 'Наука', 'Космос', 'Игры', 'События']
+
 export const DatesWidget = () => {
   return (
     <DatesWidgetLayout>
-      <Heading>
-        Исторические<br />даты
-      </Heading>
-      <HDates first={2015} last={2022} />
-      <DatesSlider data={sliders} />
+      <DividerLeft vertical />
+      <DividerCenter vertical />
+      <DividerRight vertical />
+      <Box marginDown='-45px'>
+        <Heading>
+          Исторические<br />даты
+        </Heading>
+      </Box>
+      <CircleChapterBox>
+        <Box position='absolute'>
+          <HDates first={2015} last={2022} />
+        </Box>
+        <CircleChapter chapters={chapters} />
+      </CircleChapterBox>
+      <SliderBox>
+        <DatesSlider data={sliders} />
+      </SliderBox>
     </DatesWidgetLayout>
   )
 }
