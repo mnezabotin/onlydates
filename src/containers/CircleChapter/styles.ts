@@ -17,7 +17,7 @@ export const DividerCenter = styled(Divider)`
   left: 0;
 `
 
-export const Box = styled.div`
+export const CircleBox = styled.div`
   position: relative;
   width: 530px;
   height: 530px;
@@ -41,4 +41,5 @@ export const Dot = styled.div`
   left: 50%;
   border: 1px solid;
   border-color: transparent;
+  transform-origin: -265px center;
 `

@@ -2,12 +2,18 @@ import styled, {css } from 'styled-components'
 
 type Props = {
   position?:  string
-  marginDown?: string | number
+  marginBottom?: string | number
+  fontSize?: string | number
+  color?: string
+  padding?: string
 }
 
 export const Box = styled.div<Props>`
   ${(props) => css`
     position: ${props.position};
-    margin-down: ${props.marginDown}
+    color: ${props.color};
+    padding: ${props.padding};
+    font-size: ${props.fontSize};
+    margin-bottom: ${props.marginBottom};
   `}
 `
