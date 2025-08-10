@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useMemo } from 'react'
 // @ts-ignore
 import { gsap } from 'gsap'
 // @ts-ignore
@@ -9,11 +9,19 @@ import { Layout, DividerCenter, CircleBox, Circle, Dot } from './styles'
 type Props = {
   activeInd: number
   chapters?: string[]
+  onChange: (value: number) => void
 }
 
-export const CircleChapter = ({ activeInd, chapters = [] }: Props) => {
+export const CircleChapter = ({ activeInd, chapters = [], onChange }: Props) => {
   const dotsScope = useRef()
   const [prevInd, setPrevInd] = useState(0)
+
+  const stepAngl = useMemo(() => 360 / chapters.length, [chapters])
+
+  const dots = useMemo(() => chapters.map((c, i) => ({
+    title: c,
+    rotate: -(-stepAngl * activeInd - 90 + stepAngl / 2 + i * stepAngl)
+  })), [chapters, stepAngl, activeInd])
 
   useGSAP(() => {
     const dots = gsap.utils.toArray('.dot')
@@ -43,6 +51,7 @@ export const CircleChapter = ({ activeInd, chapters = [] }: Props) => {
     dependencies: [
       dotsScope,
       chapters,
+      stepAngl,
       activeInd
     ]
   })
@@ -53,11 +62,20 @@ export const CircleChapter = ({ activeInd, chapters = [] }: Props) => {
       <CircleBox>
         <Circle />
         <div ref={dotsScope.current}>
-          {chapters.map((c) => (
+          {dots.map(({ title, rotate }, i) => (
             <Dot
-              key={c}
+              key={title}
               className='dot'
-            />
+              onClick={() => onChange(i)}
+            >
+              <div
+                className={i === activeInd ? 'active' : ''}
+                style={{ transform: `rotate(${rotate}deg)` }}
+              >
+                {i + 1}
+                <span>{title}</span>
+              </div>
+            </Dot>
           ))}
         </div>
       </CircleBox>

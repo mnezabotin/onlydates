@@ -32,14 +32,58 @@ export const Circle = styled.div`
 `
 
 export const Dot = styled.div`
-  width: 6px;
-  height: 6px;
-  background-color: ${colors.blackBlue};
-  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
+  border-radius: 50%;
   top: 50%;
   left: 50%;
-  border: 1px solid;
-  border-color: transparent;
-  transform-origin: -265px center;
+  transform-origin: -237px center;
+  cursor: pointer;
+
+  & > div {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${colors.blackBlue};
+    border-color: transparent;
+    transition: all 100ms;
+    overflow: hidden;
+    position: relative;
+  }
+
+  & > div.active,
+  &:hover > div {
+    width: 56px;
+    height: 56px;
+    background-color: ${colors.background};
+    border-color: ${colors.dotBorder};
+  }
+
+  & > div.active {
+    overflow: visible;
+  }
+
+  & > div > span {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    left: 100%;
+    margin-left: 20px;
+    color: ${colors.blackBlue};
+    transition: opacity 1s;
+    opacity: 0;
+  }
+
+  & > div.active > span {
+    transition-delay: 400ms;
+    opacity: 1;
+  }
 `

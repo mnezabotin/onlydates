@@ -21,7 +21,7 @@ const sliders = [
   { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
 ]
 
-const chapters = ['Литература', 'Кино', 'Наука', 'Космос', 'Игры', 'События']
+const chapters = ['Литература', /*'Кино', 'Наука',*/ 'Космос', 'Игры', 'События']
 
 export const DatesWidget = () => {
   const [chapterInd, setChapterInd] = useState(0)
@@ -40,7 +40,11 @@ export const DatesWidget = () => {
         <Box position='absolute'>
           <HDates first={2015} last={2022} />
         </Box>
-        <CircleChapter activeInd={chapterInd} chapters={chapters} />
+        <CircleChapter
+          activeInd={chapterInd}
+          chapters={chapters}
+          onChange={setChapterInd}
+        />
       </CircleChapterBox>
       <PrevNextButtons
         current={chapterInd}

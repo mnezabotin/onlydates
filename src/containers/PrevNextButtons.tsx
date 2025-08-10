@@ -17,6 +17,7 @@ const NavButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
 `
 
 type Props = {
@@ -37,7 +38,7 @@ export const PrevNextButtons = ({ current, size, onChange }: Props) => {
   }
 
   return (
-    <Box padding='0 0 60px 80px'>
+    <Box padding='0 0 60px 80px' marginTop='-60px'>
       <Box
         marginBottom='20px'
         fontSize='14px'
