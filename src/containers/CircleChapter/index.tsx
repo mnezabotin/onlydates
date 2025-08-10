@@ -1,7 +1,6 @@
 import React, { useRef, useState, useMemo } from 'react'
-// @ts-ignore
+
 import { gsap } from 'gsap'
-// @ts-ignore
 import { useGSAP } from '@gsap/react'
 
 import { Layout, DividerCenter, CircleBox, Circle, Dot } from './styles'
@@ -30,9 +29,9 @@ export const CircleChapter = ({ activeInd, chapters = [], onChange }: Props) => 
       const dot = dots[i]
       const rotationStart = -stepAngl * prevInd - 90 + stepAngl / 2 + i * stepAngl
       const rotationEnd = -stepAngl * activeInd - 90 + stepAngl / 2 + i * stepAngl
-      gsap.set(dot, { translateX: '265px' })
+      gsap.set(dot as HTMLElement, { translateX: '265px' })
       gsap.fromTo(
-        dot,
+        dot as HTMLElement,
         {
           xPercent: -50,
           yPercent: -50,

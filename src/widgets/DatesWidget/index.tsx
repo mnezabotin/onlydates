@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { SliderBox, DatesWidgetLayout, DividerCenter, DividerLeft, DividerRight, CircleChapterBox } from './styles'
 import { Heading } from '../../components/Heading'
 import { DatesSlider } from '../../containers/DatesSlider'
@@ -6,25 +6,31 @@ import { CircleChapter } from '../../containers/CircleChapter/index'
 import { Box } from '../../styles/Box'
 import { HDates } from '../../containers/HDates'
 import { PrevNextButtons } from '../../containers/PrevNextButtons'
+import { useQueryChapters } from '../../queries/qChapters'
+import { useQueryDates } from '../../queries/qDates'
 
-const sliders = [
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-  { date: '2015', desc: '13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' },
-]
-
-const chapters = ['Литература', /*'Кино', 'Наука',*/ 'Космос', 'Игры', 'События']
 
 export const DatesWidget = () => {
   const [chapterInd, setChapterInd] = useState(0)
+  const { data: chapters } = useQueryChapters()
+  const chapter = useMemo(() => chapters ? chapters[chapterInd] : undefined, [chapterInd, chapters])
+  const { data: dates } = useQueryDates(chapter)
+
+  const startDate = useMemo(() => {
+    if (!dates) {
+      return 2000
+    }
+
+    return Math.min(...dates.map(d => d.date))
+  }, [dates])
+
+  const endDate = useMemo(() => {
+    if (!dates) {
+      return 2000
+    }
+
+    return Math.max(...dates.map(d => d.date))
+  }, [dates])
 
   return (
     <DatesWidgetLayout>
@@ -38,7 +44,7 @@ export const DatesWidget = () => {
       </Box>
       <CircleChapterBox>
         <Box position='absolute'>
-          <HDates first={2015} last={2022} />
+          <HDates first={startDate} last={endDate} />
         </Box>
         <CircleChapter
           activeInd={chapterInd}
@@ -48,11 +54,11 @@ export const DatesWidget = () => {
       </CircleChapterBox>
       <PrevNextButtons
         current={chapterInd}
-        size={chapters.length}
+        size={chapters?.length || 0}
         onChange={setChapterInd}
       />
       <SliderBox>
-        <DatesSlider data={sliders} />
+        <DatesSlider data={dates} />
       </SliderBox>
     </DatesWidgetLayout>
   )
