@@ -15,6 +15,7 @@ export const App = () => (
   <QueryClientProvider client={queryClient}>
     <Layout>
       <DatesWidget />
+      <DatesWidget />
     </Layout>
   </QueryClientProvider>
 )

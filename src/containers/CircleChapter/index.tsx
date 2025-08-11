@@ -46,7 +46,7 @@ export const CircleChapter = ({ activeInd, chapters = [], onChange }: Props) => 
     }
     setPrevInd(activeInd)
   }, {
-    scope: dotsScope.current,
+    scope: dotsScope,
     dependencies: [
       dotsScope,
       chapters,
@@ -59,7 +59,8 @@ export const CircleChapter = ({ activeInd, chapters = [], onChange }: Props) => 
     <Layout>
       <CircleBox>
         <Circle />
-        <div ref={dotsScope.current}>
+        {/*// @ts-ignore */}
+        <div ref={dotsScope}>
           {dots.map(({ title, rotate }, i) => (
             <Dot
               key={title}
