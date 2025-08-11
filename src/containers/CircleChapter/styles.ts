@@ -1,20 +1,18 @@
 import styled from 'styled-components'
-import { colors } from '../../styles/colors'
+import { colors } from '../../styles/theme'
 import { Divider } from '../../components/Divider'
 
 export const Layout = styled.div`
   position: relative;
   width: 100%;
-  display: grid;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 100;
-`
 
-export const DividerCenter = styled(Divider)`
-  position: absolute;
-  top: calc(50% - 0.5px);
-  left: 0;
+  @media (min-width: 768px) {
+    display: grid;
+  }
 `
 
 export const CircleBox = styled.div`

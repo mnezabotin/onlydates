@@ -7,11 +7,13 @@ type Props = {
   fontSize?: string | number
   color?: string
   padding?: string
+  width?: string | number
 }
 
 export const Box = styled.div<Props>`
   ${(props) => css`
     position: ${props.position};
+    width: ${props.width};
     color: ${props.color};
     padding: ${props.padding};
     font-size: ${props.fontSize};

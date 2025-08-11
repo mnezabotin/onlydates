@@ -3,7 +3,7 @@ import React, { useRef, useState, useMemo } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 
-import { Layout, DividerCenter, CircleBox, Circle, Dot } from './styles'
+import { Layout, CircleBox, Circle, Dot } from './styles'
 
 type Props = {
   activeInd: number
@@ -57,7 +57,6 @@ export const CircleChapter = ({ activeInd, chapters = [], onChange }: Props) => 
 
   return (
     <Layout>
-      <DividerCenter />
       <CircleBox>
         <Circle />
         <div ref={dotsScope.current}>

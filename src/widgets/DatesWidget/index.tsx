@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { SliderBox, DatesWidgetLayout, DividerCenter, DividerLeft, DividerRight, CircleChapterBox } from './styles'
+import { SliderBox, DatesWidgetLayout, DividerCenter, DividerLeft, DividerRight, CircleChapterBox, HDatesBox, HeadingBox, DividerHCenter, NavSliderBox } from './styles'
 import { Heading } from '../../components/Heading'
 import { DatesSlider } from '../../containers/DatesSlider'
 import { CircleChapter } from '../../containers/CircleChapter/index'
@@ -37,29 +37,34 @@ export const DatesWidget = () => {
       <DividerLeft vertical />
       <DividerCenter vertical />
       <DividerRight vertical />
-      <Box marginBottom='-45px'>
+      <HeadingBox>
         <Heading>
           Исторические<br />даты
         </Heading>
-      </Box>
+      </HeadingBox>
       <CircleChapterBox>
-        <Box position='absolute'>
+        <DividerHCenter />
+        <HDatesBox>
           <HDates first={startDate} last={endDate} />
-        </Box>
+        </HDatesBox>
         <CircleChapter
           activeInd={chapterInd}
           chapters={chapters}
           onChange={setChapterInd}
         />
       </CircleChapterBox>
-      <PrevNextButtons
-        current={chapterInd}
-        size={chapters?.length || 0}
-        onChange={setChapterInd}
-      />
-      <SliderBox>
-        <DatesSlider data={dates} />
-      </SliderBox>
+      <NavSliderBox>
+        <PrevNextButtons
+          current={chapterInd}
+          size={chapters?.length || 0}
+          onChange={setChapterInd}
+        />
+        <Box width='100%'>
+          <SliderBox>
+            <DatesSlider data={dates} />
+          </SliderBox>
+        </Box>
+      </NavSliderBox>
     </DatesWidgetLayout>
   )
 }
